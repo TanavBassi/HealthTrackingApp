@@ -7,8 +7,8 @@ import axios from 'axios';
 
 @Injectable()
 export class KeepAliveService {
-  // EVERY 1 MINUTE
-  @Cron('*/1 * * * *')
+  // EVERY 10 MINUTE
+  @Cron('*/10 * * * *')
   async keepServerAlive() {
     try {
       console.log('KEEP ALIVE STARTED');
