@@ -3,23 +3,23 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
-  password: string;
+  password!: string;
 
   @IsNumber()
-  age: number;
+  age!: number;
 
   @IsString()
-  gender: string;
+  gender!: string;
 
   @IsNumber()
-  weight: number;
+  weight!: number;
 
   @IsNumber()
-  height: number;
+  height!: number;
 }

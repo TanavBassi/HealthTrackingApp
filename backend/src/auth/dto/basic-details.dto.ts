@@ -3,12 +3,12 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 export class BasicDetailsDto {
   @IsString()
   @IsNotEmpty()
-  firstName: string;
+  firstName!: string;
 
   @IsString()
   @IsNotEmpty()
-  lastName: string;
+  lastName!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 }

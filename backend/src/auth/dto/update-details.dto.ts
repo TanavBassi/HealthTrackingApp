@@ -2,11 +2,11 @@ import { IsNumber } from 'class-validator';
 
 export class UpdateDetailsDto {
   @IsNumber()
-  age: number;
+  age!: number;
 
   @IsNumber()
-  weight: number;
+  weight!: number;
 
   @IsNumber()
-  height: number;
+  height!: number;
 }

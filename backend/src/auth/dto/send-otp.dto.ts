@@ -2,13 +2,13 @@ import { IsEmail, IsString, MinLength } from 'class-validator';
 
 export class SendOtpDto {
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @MinLength(6)
-  password: string;
+  password!: string;
 
   @IsString()
   @MinLength(6)
-  confirmPassword: string;
+  confirmPassword!: string;
 }
