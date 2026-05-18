@@ -6,8 +6,10 @@ import { AppService } from './app.service';
 
 import { KeepAliveService } from './keepAlive.service';
 
+import { AuthModule } from './auth/auth.module';
+
 @Module({
-  imports: [ScheduleModule.forRoot()],
+  imports: [ScheduleModule.forRoot(), AuthModule],
 
   controllers: [AppController],
 
