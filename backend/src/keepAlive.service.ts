@@ -7,14 +7,14 @@ import axios from 'axios';
 
 @Injectable()
 export class KeepAliveService {
-  // EVERY 10 MINUTES
-  @Cron('*/10 * * * *')
+  // EVERY 1 MINUTE
+  @Cron('*/1 * * * *')
   async keepServerAlive() {
     try {
       console.log('KEEP ALIVE STARTED');
 
       const response = await axios.get(
-        'https://YOUR-RENDER-URL.onrender.com/ping',
+        'https://healthtrackingapp-mv1w.onrender.com/',
       );
 
       console.log('SERVER IS AWAKE:', response.status);
