@@ -1,26 +1,52 @@
 import * as nodemailer from 'nodemailer';
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 export const sendOtp = async (email: string, otp: string) => {
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
+  try {
+    const config: SMTPTransport.Options = {
+      host: 'smtp.gmail.com',
 
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+      port: 587,
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
+      secure: false,
 
-    to: email,
+      auth: {
+        user: process.env.EMAIL_USER,
 
-    subject: 'Health Tracking App OTP',
+        pass: process.env.EMAIL_PASS,
+      },
 
-    html: `
-      <h2>Your OTP Code</h2>
-      <h1>${otp}</h1>
-      <p>This OTP expires soon.</p>
-    `,
-  });
+      tls: {
+        rejectUnauthorized: false,
+      },
+    };
+
+    const transporter = nodemailer.createTransport(config);
+
+    await transporter.sendMail({
+      from: `"Health Tracking App" <${process.env.EMAIL_USER}>`,
+
+      to: email,
+
+      subject: 'Health Tracking App OTP',
+
+      html: `
+        <div style="font-family:sans-serif;padding:20px">
+          <h2>Your OTP Code</h2>
+
+          <h1>${otp}</h1>
+
+          <p>
+            This OTP expires in 5 minutes.
+          </p>
+        </div>
+      `,
+    });
+
+    console.log('OTP EMAIL SENT SUCCESSFULLY');
+  } catch (error) {
+    console.log('SEND OTP ERROR:', error);
+
+    throw error;
+  }
 };
