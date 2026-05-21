@@ -2,6 +2,14 @@ import * as nodemailer from 'nodemailer';
 
 export const sendOtp = async (email: string, otp: string) => {
   try {
+    console.log('HOST:', process.env.EMAIL_HOST);
+
+    console.log('PORT:', process.env.EMAIL_PORT);
+
+    console.log('USER:', process.env.EMAIL_USER);
+
+    console.log('PASS EXISTS:', !!process.env.EMAIL_PASS);
+
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
 
@@ -30,16 +38,16 @@ export const sendOtp = async (email: string, otp: string) => {
       subject: 'Health Tracking App OTP',
 
       html: `
-        <div style="font-family:sans-serif;padding:20px">
-          <h2>Your OTP Code</h2>
+      <div style="font-family:sans-serif;padding:20px">
+        <h2>Your OTP Code</h2>
 
-          <h1>${otp}</h1>
+        <h1>${otp}</h1>
 
-          <p>
-            <strong>Important:</strong>
-            This OTP expires in 5 minutes.
-          </p>
-        </div>
+        <p>
+          <strong>Important:</strong>
+          This OTP expires in 5 minutes.
+        </p>
+      </div>
       `,
     });
 
