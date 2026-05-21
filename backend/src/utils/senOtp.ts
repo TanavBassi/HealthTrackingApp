@@ -1,22 +1,18 @@
 import * as nodemailer from 'nodemailer';
-import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 export const sendOtp = async (email: string, otp: string) => {
   try {
-    const config: SMTPTransport.Options = {
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
 
-      tls: {
-        rejectUnauthorized: false,
-      },
-    };
-    const transporter = nodemailer.createTransport(config);
+      connectionTimeout: 20000,
+    });
+
     await transporter.sendMail({
       from: `"Health Tracking App" <${process.env.EMAIL_USER}>`,
 
@@ -29,12 +25,14 @@ export const sendOtp = async (email: string, otp: string) => {
           <h2>Your OTP Code</h2>
 
           <h1>${otp}</h1>
+
           <p>
             <strong>Important:</strong> This OTP expires in 5 minutes.
           </p>
         </div>
       `,
     });
+
     console.log('OTP EMAIL SENT SUCCESSFULLY');
   } catch (error) {
     console.log('SEND OTP ERROR:', error);
