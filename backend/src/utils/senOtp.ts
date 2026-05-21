@@ -3,16 +3,16 @@ import * as nodemailer from 'nodemailer';
 export const sendOtp = async (email: string, otp: string) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
+      host: process.env.EMAIL_HOST,
 
-      port: 465,
+      port: Number(process.env.EMAIL_PORT),
 
-      secure: true,
+      secure: false,
 
       auth: {
         user: process.env.EMAIL_USER,
 
-        pass: process.env.EMAIL_PASS?.replace(/\s/g, ''),
+        pass: process.env.EMAIL_PASS,
       },
 
       connectionTimeout: 30000,
