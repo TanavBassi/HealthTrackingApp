@@ -13,7 +13,9 @@ export class KeepAliveService {
     try {
       console.log('KEEP ALIVE STARTED');
 
-      const response = await axios.get('http://192.168.1.19:3000/');
+      const response = await axios.get(
+        'https://healthtrackingapp-mv1w.onrender.com',
+      );
 
       console.log('SERVER IS AWAKE:', response.status);
     } catch (error: any) {
