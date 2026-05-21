@@ -7,9 +7,16 @@ import { AppService } from './app.service';
 import { KeepAliveService } from './keepAlive.service';
 
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [ScheduleModule.forRoot(), AuthModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    ScheduleModule.forRoot(),
+    AuthModule,
+  ],
 
   controllers: [AppController],
 
